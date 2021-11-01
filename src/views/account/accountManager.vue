@@ -80,7 +80,7 @@
                   <el-button type="primary" @click="updateAccount(form.id, form.uid, form.account_id, form.cookieToken, form.device_id)">确 定</el-button>
                 </div>
               </el-dialog>&emsp;
-              <!-- 编辑账号弹窗end -->
+              <!-- 账号弹窗end -->
             
             <el-button size="medium" type="danger" @click="handleDelete(scope.row)">删除</el-button>
           </template>
