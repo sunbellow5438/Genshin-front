@@ -20,7 +20,7 @@
           </div>
          <div>
             <el-form-item>
-            <el-button type="primary" @click="onSubmit">查询</el-button>
+            <el-button type="primary" @click="onSubmit()">查询</el-button>
             <el-button @click="reSet">重置</el-button>
           </el-form-item>
          </div>
@@ -129,20 +129,21 @@ export default {
 
     // 通过条件查询
     onSubmit() {
-      var url = '/genShin/user_info'
+      var url = '/genShin/signLogs'
       let params = {}
-      if(this.formInline.account_id != ""){
-        params.accountId = this.formInline.account_id
+      if(this.formInline.accountId != ""){
+        params.accountId = this.formInline.accountId
       }
-      if(this.formInline.cookieToken != ""){
-        params.cookieToken = this.formInline.cookieToken
+      if(this.formInline.response != ""){
+        params.response = this.formInline.response
       }
-      if(this.formInline.device_id != ""){
-        params.deviceId = this.formInline.device_id
+      if(this.formInline.status != ""){
+        params.status = this.formInline.status
       }
-      if(this.formInline.uid != ""){
-        params.uid = this.formInline.uid
+      if(this.formInline.datatime != ""){
+        params.datatime = this.formInline.datatime
       }
+      
       this.axios
         .get(url, {params: params})
         .then(response => {
@@ -158,13 +159,15 @@ export default {
     
     // 重置按钮
     reSet() {
-      var url = '/genShin/user_info'
+      var url = '/genShin/signLogs'
       this.axios
         .get(url)
         .then(response => {
-          this.tableData = response.data.data.content
-          this.total = response.data.data.total
-          this.loading = false
+        this.$router.go(0)
+        this.formInline = ''
+        // this.tableData = response.data.data.content
+        // this.total = response.data.data.total
+        // this.loading = false
         })
         .catch(error => {
           this.loading = false

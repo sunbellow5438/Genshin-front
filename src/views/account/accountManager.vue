@@ -23,7 +23,7 @@
           </div>
          <div>
             <el-form-item>
-            <el-button type="primary" @click="onSubmit">查询</el-button>
+            <el-button type="primary" @click="onSubmit()">查询</el-button>
             <el-button @click="reSet">重置</el-button>
           </el-form-item>
          </div>
@@ -202,9 +202,12 @@ export default {
       this.axios
         .get(url)
         .then(response => {
-          this.tableData = response.data.data.content
-          this.total = response.data.data.total
+          this.$router.go(0)
+          this.formInline = ''
+          // this.tableData = response.data.data.content
+          // this.total = response.data.data.total
           this.loading = false
+          
         })
         .catch(error => {
           this.loading = false
@@ -218,7 +221,7 @@ export default {
         .get(url)
         .then(response => {
         this.loading = false
-        if(response.data.retcode != -1){
+        if(response.data.retcode === 0){
           this.$message({
             message: '签到成功 ( ੭ ˙ᗜ˙ )੭',
             type: 'success'
