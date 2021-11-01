@@ -36,8 +36,19 @@ module.exports = {
       warnings: false,
       errors: true
     },
-    before: require('./mock/mock-server.js')
+      // 代理
+    proxy: {
+      '/genShin': {
+        target: 'http://110.42.139.147',
+        source: true,
+        changeOrigin: true,
+        pathRewrite: {
+          '^/genShin': ''
+        }
+      },
+    },
   },
+
   configureWebpack: {
     // provide the app's title in webpack's name field, so that
     // it can be accessed in index.html to inject the correct title.
